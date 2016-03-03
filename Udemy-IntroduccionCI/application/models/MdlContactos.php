@@ -8,7 +8,7 @@
  * @package  Aplications
  * @author   ISC Alejandro Aguilar <kainraziellok@gmail.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
- * @version  GIT: <b641768>, 0.1
+ * @version  GIT: <b641768>, v0.1
  * @link     aplications/models
  */
 defined('BASEPATH') or exit('No direct script access allowed');
