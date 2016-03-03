@@ -1,8 +1,15 @@
 <?php
 /**
- * MdlContactos
+ * MdlContactos file
  *
- * @version GIT: <1.0>
+ * PHP version 5.6
+ *
+ * @category Models
+ * @package  Aplications
+ * @author   ISC Alejandro Aguilar <kainraziellok@gmail.com>
+ * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @version  GIT: <b641768>, 0.1
+ * @link     aplications/models
  */
 defined('BASEPATH') or exit('No direct script access allowed');
 
