@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lección 1 Udemy-jQuery</title>
+        <!--Import JS-->
+        <script type="text/javascript" src="js/lib/jquery-2.2.0.min.js"></script>
+        <!--Import CSS-->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <style type="text/css">
+            .textoVerde {
+                color: green;
+            }
+        </style>
+        <script type="text/javascript">
+            //Version 1
+            /*$(document).ready(function(){
+             //jQuery('ul').css('color', 'red');
+             $('ul').addClass('textoVerde');
+             $('.negrita').css('font-weight', 'bold');
+             });*/
+
+            //Version 2
+            $(function () {
+                $('.negrita').css('font-weight', 'bold');
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Lección 1</h1>
+            <hr/>
+            <ul>
+                <li>Hola 1</li>
+                <li>Hola 2</li>
+                <li>Hola 3</li>
+            </ul>
+
+            <ul class="negrita">
+                <li>Negrita</li>
+                <li>Negrita</li>
+                <li>Negrita</li>
+            </ul>
+        </div>
+    </body>
+</html>
