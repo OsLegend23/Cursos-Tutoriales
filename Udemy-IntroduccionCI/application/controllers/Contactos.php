@@ -35,7 +35,7 @@ class Contactos extends CI_Controller
         $this->load->model('MdlContactos');
 
         $data['listado'] = $this->MdlContactos->getTodos();
-        $this->load->view('view_lista_contactos', $data);
+        $this->load->view('vw_ListaContactos', $data);
     }//end index()
 
 
@@ -64,13 +64,39 @@ class Contactos extends CI_Controller
                 echo 'El id creado es ', $id_insertado;
             } else {
                 echo 'NO VALIDADO';
-                $this->load->view('view_formulario_contacto');
+                $this->load->view('vw_FormularioContacto');
             }
         } else {
             echo 'NO VALIDADO POST';
-            $this->load->view('view_formulario_contacto');
+            $this->load->view('vw_FormularioContacto');
         }
     }//end agregar()
 
+
+    /**
+     * Método para modificar los ratos de registro en una base de datos.
+     *
+     * @param int id Identifiador del registro a modificar.
+     */
+
+    public function modificarDatos($id = null)
+    {
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $this->load->model('MdlContactos');
+
+        if ($id === null or !is_numeric($id)) {
+            echo 'Error en el ID';
+            return;
+        } else {
+            $data['datos_contacto'] = $this->MdlContactos->getById($id);
+
+            if(empty($data['datos_contacto'])) {
+                echo 'No existe el Id solicitado';
+            } else {
+                echo 'Pasar a la vista';
+            }
+        }
+    }//end modificarDatos($id)
 
 }//end class

@@ -42,6 +42,23 @@ class MdlContactos extends CI_Model
 
 
     /**
+     * Método para obtener Todos los contactos.
+     *
+     * @param  int $id Identificador de la consutla.
+     *
+     * @return array result Array con todos los datos.
+     */
+    public function getById($id)
+    {
+        $this->load->database();
+        $query = $this->db->where('con_id', $id);
+        $query = $this->db->get('Contactos');
+
+        return $query->result();
+
+    }//end getTodos()
+
+    /**
      * Método para agregar Datos a la tabla Contactos.
      *
      * @return int insert_id Valor del insert.

@@ -9,14 +9,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <body>
 
         <div id="container">
-            <?php
-            if (empty($listado)) {
-                echo "Sin Contactos";
-            }
-            else {
-                echo "Algunos Contactos";
-            }
-            ?>
+            <?php if (empty($listado)) { ?>
+                <h1> Sin Contactos</h1>
+            <?php } else { ?>
+                Tienes <?php echo count($listado); ?> Contactos(s);
+            <?php } ?>
         </div>
         <p class="footer">
             Page rendered in <strong>{elapsed_time}</strong>
