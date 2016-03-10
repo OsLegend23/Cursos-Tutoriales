@@ -43,7 +43,7 @@ class Contactos extends CI_Controller
      * Método utilizado para agregar los datos ingresados en el formulario de la vista a la base de datos.
      * @return $this->load->view
      */
-    public function agregar()
+    public function agregarDatos()
     {
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -55,7 +55,7 @@ class Contactos extends CI_Controller
             $this->form_validation->set_rules('con_nombre', 'Nombre', 'required|min_length[3]');
             $this->form_validation->set_rules('con_edad', 'Edad', 'required|integer');
             $this->form_validation->set_rules('con_telefono', 'Teléfono', 'trim|required');
-            $this->form_validation->set_rules('con_estatus', 'Estatus', 'trim');
+            $this->form_validation->set_rules('con_status', 'Estatus', 'trim');
 
             if ($this->form_validation->run()) {
                 // echo 'Información recibida';
@@ -82,21 +82,41 @@ class Contactos extends CI_Controller
     public function modificarDatos($id = null)
     {
         $this->load->helper('form');
+        $this->load->helper('url');
         $this->load->library('form_validation');
         $this->load->model('MdlContactos');
 
         if ($id === null or !is_numeric($id)) {
             echo 'Error en el ID';
+
             return;
+        }
+
+        // Recibiendo la información del formulario.
+        if ($this->input->post()) {
+            $this->form_validation->set_rules('con_email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('con_nombre', 'Nombre', 'required|min_length[3]');
+            $this->form_validation->set_rules('con_edad', 'Edad', 'required|integer');
+            $this->form_validation->set_rules('con_telefono', 'Teléfono', 'trim|required');
+            $this->form_validation->set_rules('con_status', 'Estatus', 'trim');
+
+            if ($this->form_validation->run()) {
+                $this->MdlContactos->updateData($id);
+                redirect('contactos');
+            } else {
+                $this->load->view('vw_FormularioContacto');
+            }
+
         } else {
             $data['datos_contacto'] = $this->MdlContactos->getById($id);
 
-            if(empty($data['datos_contacto'])) {
+            if (empty($data['datos_contacto'])) {
                 echo 'No existe el Id solicitado';
             } else {
-                echo 'Pasar a la vista';
+                $this->load->view('vw_FormularioContacto', $data);
             }
         }
+
     }//end modificarDatos($id)
 
 }//end class

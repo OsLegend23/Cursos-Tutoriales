@@ -10,11 +10,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         <div id="container">
             <?php
-            $input_con_email = ['name' => 'con_email', 'id' => 'con_email', 'size' => '100', 'maxlength' => '120', 'value' => set_value('con_email'), 'type' => 'email'];
-            $input_con_nombre = ['name' => 'con_nombre', 'id' => 'con_nombre', 'size' => '50', 'maxlength' => '60', 'value' => set_value('con_nombre')];
-            $input_con_telefono = ['name' => 'con_telefono', 'id' => 'con_telefono', 'size' => '10', 'maxlength' => '10', 'value' => set_value('con_telefono')];
-            $input_con_edad = ['name' => 'con_edad', 'id' => 'con_edad', 'size' => '3', 'maxlength' => '3', 'value' => set_value('con_edad')];
-            $opciones = ['0' => 'Inactivo', '1' => 'Activo'];
+            $input_con_email = ['name'      => 'con_email',
+                                'id'        => 'con_email',
+                                'size'      => '100',
+                                'maxlength' => '120',
+                                'value'     => set_value('con_email', @$datos_contacto[0]->con_email),
+                                'type'      => 'email'];
+
+            $input_con_nombre = ['name'      => 'con_nombre',
+                                 'id'        => 'con_nombre',
+                                 'size'      => '50',
+                                 'maxlength' => '60',
+                                 'value'     => set_value('con_nombre', @$datos_contacto[0]->con_nombre)];
+
+            $input_con_telefono = ['name'      => 'con_telefono',
+                                   'id'        => 'con_telefono',
+                                   'size'      => '10',
+                                   'maxlength' => '10',
+                                   'value'     => set_value('con_telefono', @$datos_contacto[0]->con_telefono)];
+
+            $input_con_edad = ['name'      => 'con_edad',
+                               'id'        => 'con_edad',
+                               'size'      => '3',
+                               'maxlength' => '3',
+                               'value'     => set_value('con_edad', @$datos_contacto[0]->con_edad)];
+
+            $opciones = ['0' => 'Inactivo',
+                         '1' => 'Activo'];
             // echo validation_errors(); //Forma General
             echo form_open();
 
@@ -36,15 +58,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             echo form_error('con_edad') . "<br/>";
 
             echo form_label('Estatus: ');
-            echo form_dropdown('con_estatus', $opciones, set_value('con_estatus')) . "<br/>";
+            echo form_dropdown('con_status', $opciones, set_value('con_status'), @$datos_contacto[0]->con_status) . "<br/>";
 
             echo form_submit('btn_enviar', 'Guardar');
 
             echo form_close();
             ?>
         </div>
-        <p class="footer">Page rendered in <strong>{elapsed_time}</strong>
-                          seconds. <?php echo (ENVIRONMENT === 'development') ? 'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?>
+        <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds.
+            <?php echo (ENVIRONMENT === 'development') ? 'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?>
         </p>
     </body>
 </html>

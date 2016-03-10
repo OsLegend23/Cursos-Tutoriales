@@ -74,5 +74,15 @@ class MdlContactos extends CI_Model
 
     }//end addData()
 
+    public function updateData($id)
+    {
+        $this->load->database();
+        $data_insertar = $this->input->post();
+        unset($data_insertar['btn_enviar']);
+
+        $this->db->where('con_id', $id);
+        $this->db->update('contactos', $data_insertar);
+    }
+
 
 }//end class
