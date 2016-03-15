@@ -26,14 +26,24 @@ class Contactos extends CI_Controller
 {
 
 
+    public function __construct()
+    {
+        parent::__construct();
+        // Modelos
+        $this->load->model('MdlContactos');
+        // Helpers
+        $this->load->helper('form');
+        $this->load->helper('url');
+        // Libreries
+        $this->load->library('form_validation');
+    }
+
     /**
      * Función que inicializa los datos necesarios para el controlador.
      * @return void
      */
     public function index()
     {
-        $this->load->model('MdlContactos');
-
         $data['listado'] = $this->MdlContactos->getTodos();
         $this->load->view('vw_ListaContactos', $data);
     }//end index()
@@ -45,10 +55,6 @@ class Contactos extends CI_Controller
      */
     public function agregarDatos()
     {
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-        $this->load->model('MdlContactos');
-
         // Recibiendo la información del formulario.
         if ($this->input->post()) {
             $this->form_validation->set_rules('con_email', 'Email', 'required|valid_email');
@@ -62,6 +68,7 @@ class Contactos extends CI_Controller
                 // print_r($this->input->post());
                 $id_insertado = $this->MdlContactos->addData();
                 echo 'El id creado es ', $id_insertado;
+                redirect('Contactos');
             } else {
                 echo 'NO VALIDADO';
                 $this->load->view('vw_FormularioContacto');
@@ -81,11 +88,6 @@ class Contactos extends CI_Controller
 
     public function modificarDatos($id = null)
     {
-        $this->load->helper('form');
-        $this->load->helper('url');
-        $this->load->library('form_validation');
-        $this->load->model('MdlContactos');
-
         if ($id === null or !is_numeric($id)) {
             echo 'Error en el ID';
 
@@ -102,7 +104,7 @@ class Contactos extends CI_Controller
 
             if ($this->form_validation->run()) {
                 $this->MdlContactos->updateData($id);
-                redirect('contactos');
+                redirect('Contactos');
             } else {
                 $this->load->view('vw_FormularioContacto');
             }
@@ -118,5 +120,28 @@ class Contactos extends CI_Controller
         }
 
     }//end modificarDatos($id)
+
+    public function borrarDatos($id = null)
+    {
+        if ($id === null or !is_numeric($id)) {
+            echo 'Error en el ID';
+
+            return;
+        }
+
+        if ($this->input->post()) {
+            $id_eliminar = $this->input->post('con_id');
+            $this->MdlContactos->deleteData($id_eliminar);
+            redirect('Contactos');
+        } else {
+            $data['datos_contacto'] = $this->MdlContactos->getById($id);
+
+            if (empty($data['datos_contacto'])) {
+                echo 'No existe el Id solicitado';
+            } else {
+                $this->load->view('vw_BorrarContacto', $data);
+            }
+        }
+    }
 
 }//end class

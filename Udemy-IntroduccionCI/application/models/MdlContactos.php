@@ -26,6 +26,12 @@ class MdlContactos extends CI_Model
 {
 
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->database();
+    }
+
     /**
      * Método para obtener Todos los contactos.
      *
@@ -33,7 +39,6 @@ class MdlContactos extends CI_Model
      */
     public function getTodos()
     {
-        $this->load->database();
         $query = $this->db->get('Contactos');
 
         return $query->result();
@@ -50,8 +55,7 @@ class MdlContactos extends CI_Model
      */
     public function getById($id)
     {
-        $this->load->database();
-        $query = $this->db->where('con_id', $id);
+        $this->db->where('con_id', $id);
         $query = $this->db->get('Contactos');
 
         return $query->result();
@@ -65,7 +69,6 @@ class MdlContactos extends CI_Model
      */
     public function addData()
     {
-        $this->load->database();
         $data_insertar = $this->input->post();
         unset($data_insertar['btn_enviar']);
         $this->db->insert('contactos', $data_insertar);
@@ -76,7 +79,6 @@ class MdlContactos extends CI_Model
 
     public function updateData($id)
     {
-        $this->load->database();
         $data_insertar = $this->input->post();
         unset($data_insertar['btn_enviar']);
 
@@ -84,5 +86,10 @@ class MdlContactos extends CI_Model
         $this->db->update('contactos', $data_insertar);
     }
 
+    public function deleteData($id)
+    {
+        $this->db->where('con_id', $id);
+        $this->db->delete('contactos');
+    }
 
 }//end class
