@@ -57,12 +57,7 @@ class Contactos extends CI_Controller
     {
         // Recibiendo la información del formulario.
         if ($this->input->post()) {
-            $this->form_validation->set_rules('con_email', 'Email', 'required|valid_email');
-            $this->form_validation->set_rules('con_nombre', 'Nombre', 'required|min_length[3]');
-            $this->form_validation->set_rules('con_edad', 'Edad', 'required|integer');
-            $this->form_validation->set_rules('con_telefono', 'Teléfono', 'trim|required');
-            $this->form_validation->set_rules('con_status', 'Estatus', 'trim');
-
+            $this->reglasFormulario();
             if ($this->form_validation->run()) {
                 // echo 'Información recibida';
                 // print_r($this->input->post());
@@ -96,12 +91,7 @@ class Contactos extends CI_Controller
 
         // Recibiendo la información del formulario.
         if ($this->input->post()) {
-            $this->form_validation->set_rules('con_email', 'Email', 'required|valid_email');
-            $this->form_validation->set_rules('con_nombre', 'Nombre', 'required|min_length[3]');
-            $this->form_validation->set_rules('con_edad', 'Edad', 'required|integer');
-            $this->form_validation->set_rules('con_telefono', 'Teléfono', 'trim|required');
-            $this->form_validation->set_rules('con_status', 'Estatus', 'trim');
-
+            $this->reglasFormulario();
             if ($this->form_validation->run()) {
                 $this->MdlContactos->updateData($id);
                 redirect('Contactos');
@@ -144,4 +134,13 @@ class Contactos extends CI_Controller
         }
     }
 
+
+    private function reglasFormulario()
+    {
+        $this->form_validation->set_rules('con_email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('con_nombre', 'Nombre', 'required|min_length[3]');
+        $this->form_validation->set_rules('con_edad', 'Edad', 'required|integer');
+        $this->form_validation->set_rules('con_telefono', 'Teléfono', 'trim|required');
+        $this->form_validation->set_rules('con_status', 'Estatus', 'trim');
+    }
 }//end class
