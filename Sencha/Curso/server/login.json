@@ -1,0 +1,6 @@
+{
+  "success": false,
+  "errors" : {
+    "email": "Este correo ya existe"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "data"   : {
+    "nombre": "Alejandro Aguilar",
+    "email" : "raguilar@bts.com.mx",
+    "edad"  : 31
+  }
+}
